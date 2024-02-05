@@ -75,6 +75,7 @@ fn chunk_dir(path: &Path, chunk_size: usize) -> Vec<Vec<PathBuf>> {
 }
 
 fn copy_files(files: &[PathBuf], to: &Path, chunk_num: usize) -> io::Result<()> {
+    println!("Copying {} files to {}", files.len(), to.display());
     for file in files {
         let parent = file.parent().ok_or(io::ErrorKind::NotFound)?;
         let dest = parent.join(format!("{}_{}", to.display(), chunk_num));
