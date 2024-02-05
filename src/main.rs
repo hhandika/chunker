@@ -86,3 +86,22 @@ fn copy_files(files: &[PathBuf], to: &Path, chunk_num: usize) -> io::Result<()> 
     }
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_find_files() {
+        let path = Path::new("tests/data");
+        let files = find_files(path);
+        assert_eq!(files.len(), 4);
+    }
+
+    #[test]
+    fn test_chunk_dir() {
+        let path = Path::new("tests/data");
+        let chunks = chunk_dir(path, 2);
+        assert_eq!(chunks.len(), 2);
+    }
+}
